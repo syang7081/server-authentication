@@ -16,9 +16,9 @@ Server certificate pinning and host name verification are widely used to authent
   
   (b) On the application side, in the TLS handshaking process, use the TLS extension to insert client custom data into the ClientHello message, the custom data are: 
   
-    - Application instance ID, and
+    - Application instance ID,
     
-    - A nonce - a random number,
+    - A nonce,
     
     - A timestamp on the device the application runs
   
