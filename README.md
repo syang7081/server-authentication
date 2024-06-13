@@ -12,13 +12,13 @@ Server certificate pinning and host name verification are widely used to authent
 
 (5) If certificate pinning and host name verification fail due to server certificate update or any other reasons, the client will execute the following steps (a) - (g) to authenticate the server:
 
-  (a) The application starts a connection with the remote server with TLS or HTTPS,
+  (a) The application starts a connection with the remote server with TLS or HTTPS or Websocket,
   
   (b) On the application side, in the TLS handshaking process, use the TLS extension to insert client custom data into the ClientHello message, the custom data are: 
   
     - Application instance ID, and
     
-    - A nounce - a random number,
+    - A nonce - a random number,
     
     - A timestamp on the device the application runs
   
