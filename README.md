@@ -35,7 +35,7 @@ Server certificate pinning and host name verification are widely used to authent
 
 NOTES:
 
-1. The protocol defined from (5a) to (5g) only guarantees the server identify is verified and authenticated, in order to protect the client and server communication from Man-in-the-Middle (MiTM) attack, the hash calculated in step (5c) should be signed by the server using the server private key. This digital signature should be sent to the client in (5d). The client should verify it in step (5f) using the server public key.
+1. The protocol defined from (5a) to (5g) only guarantees the server identity is verified and authenticated, in order to protect the client and server communication from Man-in-the-Middle (MiTM) attack, the hash calculated in step (5c) should be signed by the server using the server private key. This digital signature should be sent to the client in (5d). The client should verify it in step (5f) using the server public key.
 
 2. If a HTTPS library doesn't have APIs to insert/parse TLS extension data during TLS handshaking, we may implement application or HTTP level algorithm to validate the server authentication code as described above.
 
