@@ -14,7 +14,7 @@ Server certificate pinning and host name verification are widely used to authent
 
   (5a) The application starts a connection with the remote server with TLS or HTTPS or Websocket,
   
-  (5b) On the application side, in the TLS handshaking process, use the TLS extension to insert client custom data into the ClientHello message, the custom data are: 
+  (5b) On the application side, in the TLS handshaking process, use the TLS extensions to insert client custom data into the ClientHello message, the custom data are: 
   
     - Application instance ID,
     
@@ -37,7 +37,9 @@ NOTES:
 
 1. The protocol defined from (5a) to (5g) only guarantees the server identify is verified and authenticated, in order to protect the client and server communication from Man-in-the-Middle (MiTM) attack, the hash calculated in step (5c) should be signed by the server using the server private key. This digital signature should be sent to the client in (5d). The client should verify it in step (5f) using the server public key.
 
-2. If a HTTPS library doesn't have APIs to insert/parse TLS extension data during TLS handshaking, we may implement application or HTTP level algorithm to validate the server authentication code as described above. This is an ongoing study.
+2. If a HTTPS library doesn't have APIs to insert/parse TLS extension data during TLS handshaking, we may implement application or HTTP level algorithm to validate the server authentication code as described above.
+
+3. For client and server communication using WebSocket, a specific message type can be defined to exchange data to authenticate the server. Right after a Websocket is established, client can authenticate the server by following steps (5a) - (5f), plus digital signature verification described in Note 1. TLS extensions support by WebSocket libraries is, therefore, not required.
 
 
 ----------------------------------------------------------------------------------------
