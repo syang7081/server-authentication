@@ -1,6 +1,6 @@
 Server Authentication
 
-Server certificate pinning and host name verification are widely used to authenticate remote servers by mobile and desktop applications. This technique requires that an application must contain the server certificate (or its intermediate/root certificate) or its public key hash when the application is released. When the server certificate expires or updated or revoked, certificate pinning will fail and therefore the application cannot trust the server, and is not allowed to continue to work unless a new version of the application is released. In order to make an application continue to work in such scenario, a new method is designed to authenticate the sever. The data flow of this method is as follows:
+Server certificate pinning and host name verification are widely used to authenticate remote servers by mobile and desktop applications. This technique requires that an application must contain the server certificate (or its intermediate/root certificate) or its public key hash when the application is released. When the server certificate expires or updated or revoked, certificate pinning will fail and therefore the application cannot trust the server, and is not allowed to continue to work unless a new version of the application is released. In order to make an application continue to work in such scenario, a new method is designed to authenticate the sever. The data flow of this method is described as follows:
 
 (1) The application starts a connection with the remote server through TLS or HTTPS or WebSocket, performs certificate pinning and host name verification during the TLS handshaking process, using a valid server certificate it contains,
 
@@ -41,7 +41,7 @@ NOTES:
 
 
 ----------------------------------------------------------------------------------------
-Code example to demonstrate how steps (a) - (f) in the above data flow work:
+Code example to demonstrate how steps (5a) - (5f) in the above protocol work:
 
 TlsClient.cpp - A simple client supports TLS and TLS custom extension.
 
