@@ -39,7 +39,7 @@ NOTES:
 
 2. If a HTTPS library doesn't have APIs to insert/parse TLS extension data during TLS handshaking, we may implement application or HTTP level algorithm to validate the server authentication code as described above.
 
-3. For client and server communication using WebSocket, a specific message type can be defined to exchange data to authenticate the server. Right after a Websocket is established, client can authenticate the server by following steps (5a) - (5f), plus digital signature verification described in Note 1. TLS extensions support by WebSocket libraries is, therefore, not required.
+3. For client and server communication using WebSocket, a specific message type can be defined to exchange data to authenticate the server. Right after a Websocket is established, client can authenticate the server by following steps (5a) - (5f), plus digital signature verification described in Note 1. TLS extension support by WebSocket libraries is, therefore, not required.
 
 
 ----------------------------------------------------------------------------------------
