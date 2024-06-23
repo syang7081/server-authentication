@@ -27,7 +27,7 @@ int custom_ext_add_cb_ex(SSL *s, unsigned int ext_type,
                               size_t *outlen, X509 *x,
                               size_t chainidx, int *al,
                               void *add_arg) {
-    // TODO: add SHA256 hash of (nonce and server authentication code) and digital signature
+    // TODO: add SHA256 hash of (nonce and server authentication code) and its digital signature
     return 1;
 
 }
