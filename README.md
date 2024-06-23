@@ -1,4 +1,4 @@
-Server Authentication
+# Server Authentication
 
 Server certificate pinning and host name verification are widely used to authenticate remote servers by mobile and desktop applications. This technique requires that an application must contain the server certificate (or its intermediate/root certificate) or its public key hash when the application is released. When the server certificate expires or updated or revoked, certificate pinning will fail and therefore the application cannot trust the server, and is not allowed to continue to work unless a new version of the application is released. In order to make an application continue to work in such scenario, a new method is designed to authenticate the sever. The data flow of this method is described as follows:
 
@@ -31,7 +31,7 @@ Server certificate pinning and host name verification are widely used to authent
   (5g) The application verifies the host name in the TLS handshaking is valid, the same as in the updated certificate.
 
 
-NOTES:
+## NOTES:
 
 1. The protocol defined from (5a) to (5g) only guarantees the server identity is verified and authenticated, in order to protect the client and server communication from Man-in-the-Middle (MiTM) attack, the hash calculated in step (5c) should be signed by the server using the server private key. This digital signature should be sent to the client in (5d). The client should verify it in step (5f) using the server public key.
 
@@ -39,9 +39,9 @@ NOTES:
 
 3. For client and server communication using WebSocket, a specific message type can be defined to exchange data to authenticate the server. Right after a Websocket is established, client can authenticate the server by following steps (5a) - (5f), plus digital signature verification described in Note 1. TLS extension support by WebSocket libraries is, therefore, not required.
 
+## Code Example 
 
-----------------------------------------------------------------------------------------
-Code example to demonstrate how steps (5a) - (5f) in the above protocol work:
+The following client and server code based on OpenSSL demonstrates how steps (5a) - (5f) in the above protocol work:
 
 TlsClient.cpp - A simple client supports TLS and TLS custom extension.
 
