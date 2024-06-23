@@ -18,11 +18,9 @@ Server certificate pinning and host name verification are widely used to authent
   
     - Application instance ID,
     
-    - A nonce,
-    
-    - A timestamp on the device the application runs
+    - A nonce
   
-  (5c) On the server side, the server inserts its custom data into the TLS handshaking ServerHello message. The server will first parse the client custom data it receives from the client, get the server authentication code from its secure storage based on the application instance ID in the client custom data, calculate the hash (SHA256, for example) of the client custom data and the server authentication code. This hash is the server custom data in the ServerHello message to be sent to th client.
+  (5c) On the server side, the server inserts its custom data into the TLS handshaking ServerHello message. The server will first parse the client custom data it receives from the client, get the server authentication code from its secure storage based on the application instance ID in the client custom data, calculate the hash (SHA256, for example) of the client custom data and the server authentication code. This hash is the server custom data in the ServerHello message to be sent to the client.
   
   (5d) The application receives and parses the server custom data in the TLS ServerHello message, 
   
