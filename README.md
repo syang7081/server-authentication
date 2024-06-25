@@ -39,6 +39,8 @@ Server certificate pinning and host name verification are widely used to authent
 
 3. For client and server communication using WebSocket, a specific message type can be defined to exchange data to authenticate the server. Right after a Websocket is established, client can authenticate the server by following steps (5a) - (5f), plus digital signature verification described in Note 1. TLS extension support by WebSocket libraries is, therefore, not required.
 
+4. SSO user access token can be used to authenticate resources servers, see project wiki page: https://github.com/syang7081/server-authentication/wiki.
+
 ## Code Example 
 
 The following client and server code based on OpenSSL demonstrates how steps (5a) - (5f) in the above protocol work:
