@@ -33,13 +33,15 @@ Server certificate pinning and host name verification are widely used to authent
 
 ## NOTES:
 
-1. The protocol defined from (5a) to (5g) only guarantees the server identity is verified and authenticated, in order to protect the client and server communication from Man-in-the-Middle (MiTM) attack, the hash calculated in step (5c) should be signed by the server using the server private key. This digital signature should be sent to the client in (5d). The client should verify it in step (5f) using the server public key.
+1. The protocol defined from (5a) to (5g) only guarantees the server identity is verified and authenticated, in order to protect the client and server communication from Man-in-the-Middle (MiTM) attack, the hash calculated in step (5c) should be signed by the server using the private key of the updated server certificate. This digital signature should be sent to the client in (5d). The client should verify it in step (5f) using the public key of the leaf certificate in the certificate chain interecepted during the TLS handshaking.
 
-2. If a HTTPS library doesn't have APIs to insert/parse TLS extension data during TLS handshaking, we may implement application or HTTP level algorithm to validate the server authentication code as described above.
+2. If a HTTPS library doesn't have APIs to insert/parse TLS extension data during TLS handshaking, we may implement application or HTTP level algorithm to validate the server authentication code as described above. See note 5.
 
 3. For client and server communication using WebSocket, a specific message type can be defined to exchange data to authenticate the server. Right after a Websocket is established, client can authenticate the server by following steps (5a) - (5f), plus digital signature verification described in Note 1. TLS extension support by WebSocket libraries is, therefore, not required.
 
 4. SSO user access token can be used to authenticate resources servers, see project wiki page: https://github.com/syang7081/server-authentication/wiki.
+
+5. Combining note 1 and steps (5f) - (5g), if the client can successfully verify the digital signature of the server authentication code, this means that the server owns this updated certficate and the certificate has the correct private key. The updated server certificate can therefore be trusted and be pinned in all communications after. In fact, this approach tells us that one can create a special server API to promote an updated certificate as trusted dynamically without releaseing a new version of a client. 
 
 ## Code Example 
 
