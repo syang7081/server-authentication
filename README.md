@@ -39,7 +39,7 @@ Server certificate pinning and host name verification are widely used to authent
 
 3. For client and server communication using WebSocket, a specific message type can be defined to exchange data to authenticate the server. Right after a Websocket is established, client can authenticate the server by following steps (5a) - (5f), plus digital signature verification described in Note 1. TLS extension support by WebSocket libraries is, therefore, not required.
 
-4. SSO user access token can be used to authenticate resources servers, see project wiki page: https://github.com/syang7081/server-authentication/wiki.
+4. SSO refresh token can be used to authenticate resource servers, see project wiki page: https://github.com/syang7081/server-authentication/wiki.
 
 5. Combining note 1 and steps (5f) - (5g), one can find that if the client can successfully verify the digital signature of the server authentication code, then the server does own the updated certficate and the certificate has the correct private key. The updated server certificate can therefore be trusted and be pinned in all communications after. In fact, this approach tells us that one can create a special server API to verify whether an updated certificate can be promoted as trusted dynamically without releaseing a new version of a client.
 
