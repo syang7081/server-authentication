@@ -41,7 +41,8 @@ Server certificate pinning and host name verification are widely used to authent
 
 4. SSO refresh token can be used to authenticate resource servers, see project wiki page: https://github.com/syang7081/server-authentication/wiki.
 
-5. Combining note 1 and steps (5f) - (5g), one can find that if the client can successfully verify the digital signature of the server authentication code, then the server does own the updated certficate and the certificate has the correct private key. The updated server certificate can therefore be trusted and be pinned in all communications after. In fact, this approach tells us that one can create a special server API to verify whether an updated certificate can be promoted as trusted dynamically without releaseing a new version of a client.
+5. Combining note 1 and steps (5f) - (5g), one can find that if the client can successfully verify the digital signature of the server authentication code, then the server does own the updated certficate and the certificate has the correct private key. The updated server certificate can therefore be trusted and be pinned in all communications after. In fact, this approach tells us that one can create a special server API to verify whether an updated certificate can be promoted as trusted dynamically without releaseing a new version of a client. The data flow of this process is illustrated in the following diagram:
+  ![Data flow of Server certificate verification and promotion]( https://github.com/syang7081/server-authentication/blob/main/doc/images/server-certificate-verification-promotion.png)
 
 ## Code Example 
 
