@@ -1,12 +1,12 @@
 # Server Authentication - Certificate Pinning Enhancement
 ## Method
-Server certificate pinning and host name verification are widely used to authenticate remote servers by mobile and desktop applications. This technique requires that an application must contain the server certificate (or its intermediate/root certificate) or its public key hash when the application is released. When the server certificate expires or updated or revoked, certificate pinning will fail and therefore the application cannot trust the server, and is not allowed to continue to work unless a new version of the application is released. In order to make an application continue to work in such scenario, a new method is designed to authenticate the sever. The data flow of this method is described as follows:
+Server certificate pinning and host name verification are widely used to authenticate remote servers by mobile and desktop applications. This technique requires that an application must contain the server certificate (or its intermediate/root certificate) or its public key hash when the application is released. When the server certificate expires or updated or revoked, certificate pinning will fail and therefore the application cannot trust the server, and is not allowed to continue to work unless a new version of the application is released. In order to make an application continue to work in such scenario, a new method is designed to authenticate a sever by verifying the digital signature of a shared secret between a client and a server. The data flow of this method is described as follows:
 
 (1) The application starts a connection with the remote server through TLS or HTTPS or WebSocket, performs certificate pinning and host name verification during the TLS handshaking process, using a valid server certificate it contains,
 
-(2) after step (1) is finished successfully, the application creates a server authentication code, such as a UUID, and send this server authentication code to the server, together with the application instance ID. The application instance ID should be unique. Client stores this pair of data into its secure storage.
+(2) after step (1) is finished successfully, the application creates a random server authentication code, such as a UUID, and send this server authentication code to the server, together with the application instance ID. The application instance ID should be unique. Client stores this pair of data into its secure storage.
 
-(3) The server receives the server authentication code and the application instance ID, and stores this pair of data into its secure storage, such as a database.
+(3) The server receives the server authentication code and the application instance ID, and stores this pair of data into its secure storage, such as a database. At this point, a shared secret, the server authentication code, is established between the client and the server.
 
 (4) The client closes the connection with the remote server.
 
@@ -41,7 +41,7 @@ Server certificate pinning and host name verification are widely used to authent
 
 4. SSO refresh token can be used to authenticate resource servers, see project wiki page: https://github.com/syang7081/server-authentication/wiki.
 
-5. Combining note 1 and steps (5f) - (5g), one can find that if the client can successfully verify the digital signature of the server authentication code, then the server does own the updated certficate and the certificate has the correct private key. The updated server certificate can therefore be trusted and be pinned in all communications after. In fact, this approach tells us that one can create a special server API to verify whether an updated certificate can be promoted as trusted dynamically without releaseing a new version of a client. The data flow of this process is illustrated in the following diagram:
+5. Combining note 1 and steps (5f) - (5g), one can find that if the client can successfully verify the digital signature of the server authentication code, one can conclude that the server does own the updated certficate. Because the certificate doesn't change during its validity period, the updated server certificate can therefore be trusted and be pinned in all communications after. In fact, this approach tells us that one can create a special server API to verify whether an updated certificate can be promoted as trusted dynamically without releaseing a new version of a client. The data flow of this process is illustrated in the following diagram:
   ![Data flow of Server certificate verification and promotion]( https://github.com/syang7081/server-authentication/blob/main/doc/images/server-certificate-verification-promotion.png)
 
 ## Code Example 
